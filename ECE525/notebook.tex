@@ -1,0 +1,586 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{HWK-1}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{joe-stanley}{%
+\section{Joe Stanley}\label{joe-stanley}}
+
+\hypertarget{ece-525}{%
+\subsubsection{ECE 525}\label{ece-525}}
+
+\hypertarget{homework-1}{%
+\subsubsection{Homework 1}\label{homework-1}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{} Import Libraries to Support Calculations}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{eepower} \PY{k}{as} \PY{n+nn}{eep}
+        \PY{k+kn}{from} \PY{n+nn}{eepower} \PY{k}{import} \PY{n}{u}\PY{p}{,}\PY{n}{m}\PY{p}{,}\PY{n}{k}\PY{p}{,}\PY{n}{M}
+\end{Verbatim}
+
+
+    \hypertarget{problem-1}{%
+\subsection{Problem 1}\label{problem-1}}
+
+\begin{figure}
+\centering
+\includegraphics{attachment:image.png}
+\caption{image.png}
+\end{figure}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{} Define Givens}
+        \PY{n}{Esa} \PY{o}{=} \PY{n}{eep}\PY{o}{.}\PY{n}{phasor}\PY{p}{(}\PY{l+m+mi}{70}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}
+        \PY{n}{Esb} \PY{o}{=} \PY{n}{eep}\PY{o}{.}\PY{n}{phasor}\PY{p}{(}\PY{l+m+mi}{70}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{30}\PY{p}{)}
+        \PY{n}{Zsa1} \PY{o}{=} \PY{n}{eep}\PY{o}{.}\PY{n}{phasor}\PY{p}{(}\PY{l+m+mf}{1.5}\PY{p}{,}\PY{l+m+mi}{87}\PY{p}{)}
+        \PY{n}{Zsa2} \PY{o}{=} \PY{n}{Zsa1}
+        \PY{n}{Zsa0} \PY{o}{=} \PY{n}{eep}\PY{o}{.}\PY{n}{phasor}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{87}\PY{p}{)}
+        \PY{n}{Zsb1} \PY{o}{=} \PY{n}{eep}\PY{o}{.}\PY{n}{phasor}\PY{p}{(}\PY{l+m+mf}{0.8}\PY{p}{,}\PY{l+m+mi}{83}\PY{p}{)}
+        \PY{n}{Zsb2} \PY{o}{=} \PY{n}{Zsb1}
+        \PY{n}{Zsb0} \PY{o}{=} \PY{n}{eep}\PY{o}{.}\PY{n}{phasor}\PY{p}{(}\PY{l+m+mf}{2.5}\PY{p}{,}\PY{l+m+mi}{83}\PY{p}{)}
+        \PY{n}{ZL1} \PY{o}{=} \PY{n}{eep}\PY{o}{.}\PY{n}{phasor}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{82}\PY{p}{)}
+        \PY{n}{ZL2} \PY{o}{=} \PY{n}{eep}\PY{o}{.}\PY{n}{phasor}\PY{p}{(}\PY{l+m+mi}{18}\PY{p}{,}\PY{l+m+mi}{82}\PY{p}{)}
+        \PY{n}{CTR} \PY{o}{=} \PY{l+m+mi}{1200}\PY{o}{/}\PY{l+m+mi}{5}
+        \PY{n}{VTR} \PY{o}{=} \PY{n}{PTR} \PY{o}{=} \PY{l+m+mf}{132.8}\PY{o}{*}\PY{n}{k}\PY{o}{/}\PY{l+m+mi}{70} \PY{c+c1}{\PYZsh{} Line\PYZhy{}Neutral}
+        \PY{n}{ZR} \PY{o}{=} \PY{n}{PTR}\PY{o}{/}\PY{n}{CTR}
+        
+        \PY{c+c1}{\PYZsh{} A) Convert to primary values}
+        \PY{n}{Zsa1\PYZus{}prim} \PY{o}{=} \PY{n}{Zsa1} \PY{o}{*} \PY{n}{ZR}
+        \PY{n}{Zsa2\PYZus{}prim} \PY{o}{=} \PY{n}{Zsa1\PYZus{}prim}
+        \PY{n}{Zsa0\PYZus{}prim} \PY{o}{=} \PY{n}{Zsa0} \PY{o}{*} \PY{n}{ZR}
+        \PY{n}{Zsb1\PYZus{}prim} \PY{o}{=} \PY{n}{Zsb1} \PY{o}{*} \PY{n}{ZR}
+        \PY{n}{Zsb2\PYZus{}prim} \PY{o}{=} \PY{n}{Zsb1\PYZus{}prim}
+        \PY{n}{Zsb0\PYZus{}prim} \PY{o}{=} \PY{n}{Zsb0} \PY{o}{*} \PY{n}{ZR}
+        \PY{n}{ZL1\PYZus{}prim} \PY{o}{=} \PY{n}{ZL1} \PY{o}{*} \PY{n}{ZR}
+        \PY{n}{ZL2\PYZus{}prim} \PY{o}{=} \PY{n}{ZL2} \PY{o}{*} \PY{n}{ZR}
+        \PY{n}{eep}\PY{o}{.}\PY{n}{cprint}\PY{p}{(}\PY{n}{Zsa1\PYZus{}prim}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Ohms}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ZSA1\PYZhy{}Primary}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{eep}\PY{o}{.}\PY{n}{cprint}\PY{p}{(}\PY{n}{Zsa2\PYZus{}prim}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Ohms}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ZSA2\PYZhy{}Primary}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{eep}\PY{o}{.}\PY{n}{cprint}\PY{p}{(}\PY{n}{Zsa0\PYZus{}prim}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Ohms}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ZSA0\PYZhy{}Primary}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{eep}\PY{o}{.}\PY{n}{cprint}\PY{p}{(}\PY{n}{Zsb1\PYZus{}prim}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Ohms}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ZSB1\PYZhy{}Primary}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{eep}\PY{o}{.}\PY{n}{cprint}\PY{p}{(}\PY{n}{Zsb2\PYZus{}prim}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Ohms}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ZSB2\PYZhy{}Primary}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{eep}\PY{o}{.}\PY{n}{cprint}\PY{p}{(}\PY{n}{Zsb0\PYZus{}prim}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Ohms}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ZSB0\PYZhy{}Primary}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{eep}\PY{o}{.}\PY{n}{cprint}\PY{p}{(}\PY{n}{ZL1\PYZus{}prim}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Ohms}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ZL1\PYZhy{}Primary}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{eep}\PY{o}{.}\PY{n}{cprint}\PY{p}{(}\PY{n}{ZL2\PYZus{}prim}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Ohms}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ZL2\PYZhy{}Primary}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{Esa\PYZus{}prim} \PY{o}{=} \PY{n}{Esa} \PY{o}{*} \PY{n}{PTR}
+        \PY{n}{Esb\PYZus{}prim} \PY{o}{=} \PY{n}{Esb} \PY{o}{*} \PY{n}{PTR}
+        \PY{n}{eep}\PY{o}{.}\PY{n}{cprint}\PY{p}{(}\PY{n}{Esa\PYZus{}prim}\PY{o}{/}\PY{n}{k}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{kV}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ESA\PYZhy{}Primary}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{eep}\PY{o}{.}\PY{n}{cprint}\PY{p}{(}\PY{n}{Esb\PYZus{}prim}\PY{o}{/}\PY{n}{k}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{kV}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ESB\PYZhy{}Primary}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} Evaluate Zeq to find Line Current}
+        \PY{n}{Zeq1} \PY{o}{=} \PY{n}{Zsa1\PYZus{}prim} \PY{o}{+} \PY{n}{Zsb1\PYZus{}prim} \PY{o}{+} \PY{n}{ZL1\PYZus{}prim}
+        \PY{n}{Zeq2} \PY{o}{=} \PY{n}{Zsa2\PYZus{}prim} \PY{o}{+} \PY{n}{Zsb2\PYZus{}prim} \PY{o}{+} \PY{n}{ZL2\PYZus{}prim}
+        \PY{n}{Zeq0} \PY{o}{=} \PY{n}{Zsa0\PYZus{}prim} \PY{o}{+} \PY{n}{Zsb0\PYZus{}prim}
+        \PY{c+c1}{\PYZsh{} Find Line Current}
+        \PY{n}{Iline\PYZus{}prim} \PY{o}{=} \PY{p}{(}\PY{n}{Esa\PYZus{}prim} \PY{o}{\PYZhy{}} \PY{n}{Esb\PYZus{}prim}\PY{p}{)} \PY{o}{/} \PY{n}{Zeq1}
+        \PY{n}{eep}\PY{o}{.}\PY{n}{cprint}\PY{p}{(}\PY{n}{Iline\PYZus{}prim}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{A}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Line Current (Primary):}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} Convert Line Current to Secondary, Accounting for Polarity}
+        \PY{n}{Iline\PYZus{}sec\PYZus{}R1} \PY{o}{=} \PY{n}{Iline\PYZus{}prim} \PY{o}{/} \PY{n}{CTR}
+        \PY{n}{Iline\PYZus{}sec\PYZus{}R2} \PY{o}{=} \PY{o}{\PYZhy{}} \PY{n}{Iline\PYZus{}sec\PYZus{}R1}
+        \PY{n}{eep}\PY{o}{.}\PY{n}{cprint}\PY{p}{(}\PY{n}{Iline\PYZus{}sec\PYZus{}R1}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{A}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Relay\PYZhy{}1 Line Current:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{eep}\PY{o}{.}\PY{n}{cprint}\PY{p}{(}\PY{n}{Iline\PYZus{}sec\PYZus{}R2}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{A}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Relay\PYZhy{}2 Line Current:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ZSA1-Primary 11.857 ∠ 87.0° Ohms
+ZSA2-Primary 11.857 ∠ 87.0° Ohms
+ZSA0-Primary 39.524 ∠ 87.0° Ohms
+ZSB1-Primary 6.324 ∠ 83.0° Ohms
+ZSB2-Primary 6.324 ∠ 83.0° Ohms
+ZSB0-Primary 19.762 ∠ 83.0° Ohms
+ZL1-Primary 39.524 ∠ 82.0° Ohms
+ZL2-Primary 142.286 ∠ 82.0° Ohms
+ESA-Primary 132.8 ∠ 0.0° kV
+ESB-Primary 132.8 ∠ -30.0° kV
+Line Current (Primary): 1191.994 ∠ -8.136° A
+Relay-1 Line Current: 4.967 ∠ -8.136° A
+Relay-2 Line Current: 4.967 ∠ 171.864° A
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{} B) Repeat Part A in Per\PYZhy{}Unit}
+        \PY{c+c1}{\PYZsh{} Define Per\PYZhy{}Unit Quantities}
+        \PY{n}{Sbase} \PY{o}{=} \PY{l+m+mi}{100}\PY{o}{*}\PY{n}{M}
+        \PY{n}{VbLN} \PY{o}{=} \PY{l+m+mf}{132.8}\PY{o}{*}\PY{n}{k}
+        \PY{n}{VbLL} \PY{o}{=} \PY{n}{eep}\PY{o}{.}\PY{n}{phaseline}\PY{p}{(}\PY{n}{VLN} \PY{o}{=} \PY{n}{VbLN}\PY{p}{)}
+        \PY{n}{Zbase} \PY{o}{=} \PY{n}{eep}\PY{o}{.}\PY{n}{zpu}\PY{p}{(}\PY{n}{Sbase}\PY{p}{,}\PY{n}{VLN}\PY{o}{=}\PY{n}{VbLN}\PY{p}{)}
+        \PY{n}{Ibase} \PY{o}{=} \PY{n}{eep}\PY{o}{.}\PY{n}{ipu}\PY{p}{(}\PY{n}{Sbase}\PY{p}{,}\PY{n}{VLL}\PY{o}{=}\PY{n}{VbLL}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} Display Results}
+        \PY{n}{eep}\PY{o}{.}\PY{n}{cprint}\PY{p}{(}\PY{n}{Zsa1\PYZus{}prim}\PY{o}{/}\PY{n}{Zbase}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{PU\PYZhy{}Ohms}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ZSA1\PYZhy{}Primary}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{eep}\PY{o}{.}\PY{n}{cprint}\PY{p}{(}\PY{n}{Zsa2\PYZus{}prim}\PY{o}{/}\PY{n}{Zbase}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{PU\PYZhy{}Ohms}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ZSA2\PYZhy{}Primary}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{eep}\PY{o}{.}\PY{n}{cprint}\PY{p}{(}\PY{n}{Zsa0\PYZus{}prim}\PY{o}{/}\PY{n}{Zbase}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{PU\PYZhy{}Ohms}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ZSA0\PYZhy{}Primary}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{eep}\PY{o}{.}\PY{n}{cprint}\PY{p}{(}\PY{n}{Zsb1\PYZus{}prim}\PY{o}{/}\PY{n}{Zbase}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{PU\PYZhy{}Ohms}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ZSB1\PYZhy{}Primary}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{eep}\PY{o}{.}\PY{n}{cprint}\PY{p}{(}\PY{n}{Zsb2\PYZus{}prim}\PY{o}{/}\PY{n}{Zbase}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{PU\PYZhy{}Ohms}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ZSB2\PYZhy{}Primary}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{eep}\PY{o}{.}\PY{n}{cprint}\PY{p}{(}\PY{n}{Zsb0\PYZus{}prim}\PY{o}{/}\PY{n}{Zbase}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{PU\PYZhy{}Ohms}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ZSB0\PYZhy{}Primary}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{eep}\PY{o}{.}\PY{n}{cprint}\PY{p}{(}\PY{n}{ZL1\PYZus{}prim}\PY{o}{/}\PY{n}{Zbase}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{PU\PYZhy{}Ohms}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ZL1\PYZhy{}Primary}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{eep}\PY{o}{.}\PY{n}{cprint}\PY{p}{(}\PY{n}{ZL2\PYZus{}prim}\PY{o}{/}\PY{n}{Zbase}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{PU\PYZhy{}Ohms}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ZL2\PYZhy{}Primary}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{eep}\PY{o}{.}\PY{n}{cprint}\PY{p}{(}\PY{n}{Esa\PYZus{}prim}\PY{o}{/}\PY{n}{VbLL}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{PU\PYZhy{}V}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ESA\PYZhy{}Primary}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{eep}\PY{o}{.}\PY{n}{cprint}\PY{p}{(}\PY{n}{Esb\PYZus{}prim}\PY{o}{/}\PY{n}{VbLL}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{PU\PYZhy{}V}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ESB\PYZhy{}Primary}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ZSA1-Primary 0.022 ∠ 87.0° PU-Ohms
+ZSA2-Primary 0.022 ∠ 87.0° PU-Ohms
+ZSA0-Primary 0.075 ∠ 87.0° PU-Ohms
+ZSB1-Primary 0.012 ∠ 83.0° PU-Ohms
+ZSB2-Primary 0.012 ∠ 83.0° PU-Ohms
+ZSB0-Primary 0.037 ∠ 83.0° PU-Ohms
+ZL1-Primary 0.075 ∠ 82.0° PU-Ohms
+ZL2-Primary 0.269 ∠ 82.0° PU-Ohms
+ESA-Primary 0.577 ∠ 0.0° PU-V
+ESB-Primary 0.577 ∠ -30.0° PU-V
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{c+c1}{\PYZsh{} C) Evaluate Power Flow}
+         \PY{c+c1}{\PYZsh{} Define Power Flow from Bus Function}
+         \PY{k}{def} \PY{n+nf}{pflowatbus}\PY{p}{(}\PY{n}{VLNsrc}\PY{p}{,}\PY{n}{Zsrc}\PY{p}{,}\PY{n}{Iline}\PY{p}{,}\PY{n}{phs}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,}\PY{n}{scale}\PY{o}{=}\PY{n}{k}\PY{p}{,}\PY{n+nb}{round}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} Condition Inputs}
+             \PY{n}{scale} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n}{scale}\PY{p}{)}
+             \PY{n}{phs} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{phs}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} Find Bus Voltage}
+             \PY{n}{Vbus} \PY{o}{=} \PY{n}{VLNsrc} \PY{o}{\PYZhy{}} \PY{n}{Iline} \PY{o}{*} \PY{n}{Zsrc}
+             \PY{c+c1}{\PYZsh{} Find Power Flow at Bus}
+             \PY{n}{Sbus} \PY{o}{=} \PY{p}{(}\PY{n}{phs}\PY{p}{)} \PY{o}{*} \PY{n}{Vbus} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{conj}\PY{p}{(}\PY{n}{Iline}\PY{p}{)} \PY{o}{/} \PY{n}{scale}
+             \PY{c+c1}{\PYZsh{} Break into Real/Reactive}
+             \PY{n}{Pbus} \PY{o}{=} \PY{n}{Sbus}\PY{o}{.}\PY{n}{real}
+             \PY{n}{Qbus} \PY{o}{=} \PY{n}{Sbus}\PY{o}{.}\PY{n}{imag}
+             \PY{n}{ret} \PY{o}{=} \PY{p}{[}\PY{n}{Pbus}\PY{p}{,}\PY{n}{Qbus}\PY{p}{,}\PY{n+nb}{abs}\PY{p}{(}\PY{n}{Sbus}\PY{p}{)}\PY{p}{]}
+             \PY{k}{if} \PY{n+nb}{round} \PY{o+ow}{is} \PY{o+ow}{not} \PY{k+kc}{None}\PY{p}{:}
+                 \PY{n}{ret} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{around}\PY{p}{(}\PY{n}{ret}\PY{p}{,}\PY{n+nb}{round}\PY{p}{)}
+             \PY{k}{return}\PY{p}{(}\PY{n}{ret}\PY{p}{)}
+         
+         \PY{n}{Pa}\PY{p}{,} \PY{n}{Qa}\PY{p}{,} \PY{n}{Sa} \PY{o}{=} \PY{n}{pflowatbus}\PY{p}{(}\PY{n}{Esa\PYZus{}prim}\PY{p}{,}\PY{n}{Zsa1\PYZus{}prim}\PY{p}{,}\PY{n}{Iline\PYZus{}prim}\PY{p}{,}\PY{n}{scale}\PY{o}{=}\PY{n}{M}\PY{p}{,}\PY{n+nb}{round}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Real Power Measured at Bus\PYZhy{}A:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{Pa}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{MW}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Reactive Power Meas. at Bus\PYZhy{}A:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{Qa}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{MVAr}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{n}{Pb}\PY{p}{,} \PY{n}{Qb}\PY{p}{,} \PY{n}{Sb} \PY{o}{=} \PY{n}{pflowatbus}\PY{p}{(}\PY{n}{Esb\PYZus{}prim}\PY{p}{,}\PY{n}{Zsb1\PYZus{}prim}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{n}{Iline\PYZus{}prim}\PY{p}{,}\PY{n}{scale}\PY{o}{=}\PY{n}{M}\PY{p}{,}\PY{n+nb}{round}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Real Power Measured at Bus\PYZhy{}B:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{Pb}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{MW}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Reactive Power Meas. at Bus\PYZhy{}B:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{Qb}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{MVAr}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Real Power Measured at Bus-A: 467.465 MW
+Reactive Power Meas. at Bus-A: 16.739 MVAr
+Real Power Measured at Bus-B: -444.018 MW
+Reactive Power Meas. at Bus-B: 150.093 MVAr
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}58}]:} \PY{c+c1}{\PYZsh{} D) Find the Effective Impedance}
+         \PY{c+c1}{\PYZsh{} Define effective element calculator function}
+         \PY{k}{def} \PY{n+nf}{effectivez}\PY{p}{(}\PY{n}{VLNsrc}\PY{p}{,}\PY{n}{Zsrc}\PY{p}{,}\PY{n}{Ilineseq}\PY{p}{,}\PY{n}{Zlineseq}\PY{p}{,}\PY{n}{PTR}\PY{p}{,}\PY{n}{CTR}\PY{p}{,}\PY{n+nb}{round}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} Break out Sequence Terms}
+             \PY{n}{I0}\PY{p}{,} \PY{n}{I1}\PY{p}{,} \PY{n}{I2} \PY{o}{=} \PY{n}{Ilineseq}
+             \PY{n}{Z0}\PY{p}{,} \PY{n}{Z1}\PY{p}{,} \PY{n}{Z2} \PY{o}{=} \PY{n}{Zlineseq}
+             \PY{c+c1}{\PYZsh{} Ensure that Z\PYZhy{}components are imaginary}
+             \PY{k}{if}\PY{p}{(}\PY{o+ow}{not} \PY{n+nb}{isinstance}\PY{p}{(}\PY{n}{Z0}\PY{p}{,} \PY{n+nb}{complex}\PY{p}{)}\PY{p}{)}\PY{p}{:} \PY{n}{Z0} \PY{o}{*}\PY{o}{=} \PY{l+m+mi}{1}\PY{n}{j}
+             \PY{k}{if}\PY{p}{(}\PY{o+ow}{not} \PY{n+nb}{isinstance}\PY{p}{(}\PY{n}{Z1}\PY{p}{,} \PY{n+nb}{complex}\PY{p}{)}\PY{p}{)}\PY{p}{:} \PY{n}{Z1} \PY{o}{*}\PY{o}{=} \PY{l+m+mi}{1}\PY{n}{j}
+             \PY{k}{if}\PY{p}{(}\PY{o+ow}{not} \PY{n+nb}{isinstance}\PY{p}{(}\PY{n}{Z2}\PY{p}{,} \PY{n+nb}{complex}\PY{p}{)}\PY{p}{)}\PY{p}{:} \PY{n}{Z2} \PY{o}{*}\PY{o}{=} \PY{l+m+mi}{1}\PY{n}{j}
+             \PY{c+c1}{\PYZsh{} Find Bus Voltage}
+             \PY{n}{Vbus} \PY{o}{=} \PY{n}{VLNsrc} \PY{o}{\PYZhy{}} \PY{n}{I1} \PY{o}{*} \PY{n}{Zsrc}
+             \PY{c+c1}{\PYZsh{} Evaluate Secondary Bus Voltage}
+             \PY{n}{Vbus2nd} \PY{o}{=} \PY{n}{Vbus} \PY{o}{/} \PY{n}{PTR}
+             \PY{c+c1}{\PYZsh{} Calculate ko}
+             \PY{n}{ko} \PY{o}{=} \PY{p}{(}\PY{n}{Z0}\PY{o}{\PYZhy{}}\PY{n}{Z1}\PY{p}{)}\PY{o}{/}\PY{n}{Z0}
+             \PY{c+c1}{\PYZsh{} Find the Secondary Current}
+             \PY{n}{Irelay} \PY{o}{=} \PY{n}{I1} \PY{o}{/} \PY{n}{CTR}
+             \PY{c+c1}{\PYZsh{} Calculate Effective Z\PYZhy{}AG}
+             \PY{n}{Zag\PYZus{}eff} \PY{o}{=} \PY{n}{Vbus2nd} \PY{o}{/} \PY{p}{(}\PY{n}{Irelay} \PY{o}{+} \PY{n}{ko}\PY{o}{*}\PY{n}{I0}\PY{p}{)}
+             \PY{n}{ret} \PY{o}{=} \PY{p}{[}\PY{n}{Zag\PYZus{}eff}\PY{p}{]}
+             \PY{k}{if} \PY{n+nb}{round} \PY{o+ow}{is} \PY{o+ow}{not} \PY{k+kc}{None}\PY{p}{:}
+                 \PY{n}{ret} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{around}\PY{p}{(}\PY{n}{ret}\PY{p}{,}\PY{n+nb}{round}\PY{p}{)}
+             \PY{k}{return}\PY{p}{(}\PY{n}{ret}\PY{p}{)}
+         
+         \PY{n}{eep}\PY{o}{.}\PY{n}{cprint}\PY{p}{(}\PY{n}{effectivez}\PY{p}{(}\PY{n}{Esa\PYZus{}prim}\PY{p}{,}\PY{n}{Zsa1\PYZus{}prim}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{Iline\PYZus{}prim}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}
+                               \PY{p}{[}\PY{n}{Zsa0\PYZus{}prim}\PY{p}{,}\PY{n}{Zsa1\PYZus{}prim}\PY{p}{,}\PY{n}{Zsa2\PYZus{}prim}\PY{p}{]}\PY{p}{,}\PY{n}{PTR}\PY{p}{,}\PY{n}{CTR}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,}
+                    \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ohms}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Effective Impedance From Relay 1:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{eep}\PY{o}{.}\PY{n}{cprint}\PY{p}{(}\PY{n}{effectivez}\PY{p}{(}\PY{n}{Esb\PYZus{}prim}\PY{p}{,}\PY{n}{Zsb1\PYZus{}prim}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{n}{Iline\PYZus{}prim}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}
+                               \PY{p}{[}\PY{n}{Zsb0\PYZus{}prim}\PY{p}{,}\PY{n}{Zsb1\PYZus{}prim}\PY{p}{,}\PY{n}{Zsb2\PYZus{}prim}\PY{p}{]}\PY{p}{,}\PY{n}{PTR}\PY{p}{,}\PY{n}{CTR}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,}
+                    \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ohms}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Effective Impedance From Relay 2:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Effective Impedance From Relay 1: 13.883 ∠ 2.052° ohms
+Effective Impedance From Relay 2: 13.911 ∠ 161.321° ohms
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}69}]:} \PY{c+c1}{\PYZsh{} E) 3\PYZhy{}Phase Fault (Load Flow Ignored!)}
+         \PY{c+c1}{\PYZsh{} Evaluate the line impedance}
+         \PY{n}{Za} \PY{o}{=} \PY{n}{Zsa1} \PY{o}{+} \PY{l+m+mf}{0.3}\PY{o}{*}\PY{n}{ZL1}
+         \PY{n}{Zb} \PY{o}{=} \PY{n}{Zsb1} \PY{o}{+} \PY{l+m+mf}{0.7}\PY{o}{*}\PY{n}{ZL1}
+         \PY{n}{Zth} \PY{o}{=} \PY{n}{eep}\PY{o}{.}\PY{n}{parallelz}\PY{p}{(}\PY{p}{(}\PY{n}{Za}\PY{p}{,}\PY{n}{Zb}\PY{p}{)}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Calculate Fault Current}
+         \PY{n}{Ifault\PYZus{}sec} \PY{o}{=} \PY{n}{eep}\PY{o}{.}\PY{n}{fault}\PY{o}{.}\PY{n}{phs3}\PY{p}{(}\PY{n}{Esa}\PY{p}{,}\PY{p}{[}\PY{k+kc}{None}\PY{p}{,}\PY{n}{Zth}\PY{p}{,}\PY{k+kc}{None}\PY{p}{]}\PY{p}{,}\PY{n}{sequence}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+         \PY{n}{eep}\PY{o}{.}\PY{n}{cprint}\PY{p}{(}\PY{n}{Ifault\PYZus{}sec}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{A\PYZhy{}sec}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{IA\PYZhy{}Fault}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{IB\PYZhy{}Fault}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{IC\PYZhy{}Fault}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Scale Fault Current to Primary}
+         \PY{n}{Ifault\PYZus{}pri} \PY{o}{=} \PY{n}{Ifault\PYZus{}sec} \PY{o}{*} \PY{n}{CTR}
+         \PY{n}{eep}\PY{o}{.}\PY{n}{cprint}\PY{p}{(}\PY{n}{Ifault\PYZus{}pri}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{A\PYZhy{}pri}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{IA\PYZhy{}Fault}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{IB\PYZhy{}Fault}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{IC\PYZhy{}Fault}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Divide Currents into Different Branches}
+         \PY{n}{IA\PYZus{}sec} \PY{o}{=} \PY{n}{Ifault\PYZus{}sec}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{IA\PYZus{}pri} \PY{o}{=} \PY{n}{Ifault\PYZus{}pri}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{IR1\PYZus{}sec} \PY{o}{=} \PY{n}{eep}\PY{o}{.}\PY{n}{curdiv}\PY{p}{(}\PY{n}{Za}\PY{p}{,}\PY{p}{(}\PY{n}{Zb}\PY{p}{,}\PY{p}{)}\PY{p}{,}\PY{n}{Iin}\PY{o}{=}\PY{n}{IA\PYZus{}sec}\PY{p}{)}
+         \PY{n}{IR2\PYZus{}sec} \PY{o}{=} \PY{n}{eep}\PY{o}{.}\PY{n}{curdiv}\PY{p}{(}\PY{n}{Zb}\PY{p}{,}\PY{p}{(}\PY{n}{Za}\PY{p}{,}\PY{p}{)}\PY{p}{,}\PY{n}{Iin}\PY{o}{=}\PY{n}{IA\PYZus{}sec}\PY{p}{)}
+         \PY{n}{eep}\PY{o}{.}\PY{n}{cprint}\PY{p}{(}\PY{p}{[}\PY{n}{IR1\PYZus{}sec}\PY{p}{,}\PY{n}{IR2\PYZus{}sec}\PY{p}{]}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{A\PYZhy{}sec}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Relay\PYZhy{}1 Current}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Relay\PYZhy{}2 Current}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{IR1\PYZus{}pri} \PY{o}{=} \PY{n}{eep}\PY{o}{.}\PY{n}{curdiv}\PY{p}{(}\PY{n}{Za}\PY{p}{,}\PY{p}{(}\PY{n}{Zb}\PY{p}{,}\PY{p}{)}\PY{p}{,}\PY{n}{Iin}\PY{o}{=}\PY{n}{IA\PYZus{}pri}\PY{p}{)}
+         \PY{n}{IR2\PYZus{}pri} \PY{o}{=} \PY{n}{eep}\PY{o}{.}\PY{n}{curdiv}\PY{p}{(}\PY{n}{Zb}\PY{p}{,}\PY{p}{(}\PY{n}{Za}\PY{p}{,}\PY{p}{)}\PY{p}{,}\PY{n}{Iin}\PY{o}{=}\PY{n}{IA\PYZus{}pri}\PY{p}{)}
+         \PY{n}{eep}\PY{o}{.}\PY{n}{cprint}\PY{p}{(}\PY{p}{[}\PY{n}{IR1\PYZus{}pri}\PY{p}{,}\PY{n}{IR2\PYZus{}pri}\PY{p}{]}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{A\PYZhy{}pri}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Relay\PYZhy{}1 Current}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Relay\PYZhy{}2 Current}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Compare with Load Flow}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Relay 1:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{eep}\PY{o}{.}\PY{n}{cprint}\PY{p}{(}\PY{n}{Iline\PYZus{}sec\PYZus{}R1}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{A\PYZhy{}sec}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+s2}{Load Current:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{eep}\PY{o}{.}\PY{n}{cprint}\PY{p}{(}\PY{n}{IR1\PYZus{}sec}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{A\PYZhy{}sec}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+s2}{Fault Current:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{eep}\PY{o}{.}\PY{n}{cprint}\PY{p}{(}\PY{n}{IR1\PYZus{}sec}\PY{o}{/}\PY{n}{Iline\PYZus{}sec\PYZus{}R1}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+s2}{Ratio:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Relay 2:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{eep}\PY{o}{.}\PY{n}{cprint}\PY{p}{(}\PY{n}{Iline\PYZus{}sec\PYZus{}R2}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{A\PYZhy{}sec}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+s2}{Load Current:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{eep}\PY{o}{.}\PY{n}{cprint}\PY{p}{(}\PY{n}{IR2\PYZus{}sec}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{A\PYZhy{}sec}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+s2}{Fault Current:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{eep}\PY{o}{.}\PY{n}{cprint}\PY{p}{(}\PY{n}{IR2\PYZus{}sec}\PY{o}{/}\PY{n}{Iline\PYZus{}sec\PYZus{}R2}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+s2}{Ratio:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Calculate Effective Impedance}
+         \PY{n}{eep}\PY{o}{.}\PY{n}{cprint}\PY{p}{(}\PY{n}{effectivez}\PY{p}{(}\PY{n}{Esa\PYZus{}prim}\PY{p}{,}\PY{n}{Zsa1\PYZus{}prim}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{IR1\PYZus{}pri}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}
+                               \PY{p}{[}\PY{n}{Zsa0\PYZus{}prim}\PY{p}{,}\PY{n}{Zsa1\PYZus{}prim}\PY{p}{,}\PY{n}{Zsa2\PYZus{}prim}\PY{p}{]}\PY{p}{,}\PY{n}{PTR}\PY{p}{,}\PY{n}{CTR}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,}
+                    \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ohms}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Effective Impedance From Relay 1:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{eep}\PY{o}{.}\PY{n}{cprint}\PY{p}{(}\PY{n}{effectivez}\PY{p}{(}\PY{n}{Esb\PYZus{}prim}\PY{p}{,}\PY{n}{Zsb1\PYZus{}prim}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{IR2\PYZus{}pri}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}
+                               \PY{p}{[}\PY{n}{Zsb0\PYZus{}prim}\PY{p}{,}\PY{n}{Zsb1\PYZus{}prim}\PY{p}{,}\PY{n}{Zsb2\PYZus{}prim}\PY{p}{]}\PY{p}{,}\PY{n}{PTR}\PY{p}{,}\PY{n}{CTR}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,}
+                    \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ohms}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Effective Impedance From Relay 2:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Ioperate and Irestraint}
+         \PY{n}{Icap\PYZus{}a\PYZus{}sec} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{100}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{/}\PY{n}{CTR} \PY{o}{*} \PY{l+m+mi}{1}\PY{n}{j}
+         \PY{n}{Icap\PYZus{}b\PYZus{}sec} \PY{o}{=} \PY{n}{Icap\PYZus{}a\PYZus{}sec}
+         \PY{n}{Ioperate} \PY{o}{=} \PY{n}{Icap\PYZus{}a\PYZus{}sec} \PY{o}{+} \PY{n}{Icap\PYZus{}b\PYZus{}sec} \PY{o}{+} \PY{n}{Iline\PYZus{}sec\PYZus{}R2} \PY{o}{+} \PY{n}{Iline\PYZus{}sec\PYZus{}R1}
+         \PY{n}{eep}\PY{o}{.}\PY{n}{cprint}\PY{p}{(}\PY{n}{Ioperate}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{A\PYZhy{}sec}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{I\PYZhy{}Operate (Load)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{Irestrain} \PY{o}{=} \PY{n+nb}{abs}\PY{p}{(}\PY{n}{Icap\PYZus{}a\PYZus{}sec}\PY{p}{)} \PY{o}{+} \PY{n+nb}{abs}\PY{p}{(}\PY{n}{Icap\PYZus{}b\PYZus{}sec}\PY{p}{)} \PY{o}{+} \PY{n+nb}{abs}\PY{p}{(}\PY{n}{Iline\PYZus{}sec\PYZus{}R2}\PY{p}{)} \PY{o}{+} \PY{n+nb}{abs}\PY{p}{(}\PY{n}{Iline\PYZus{}sec\PYZus{}R1}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{I\PYZhy{}Restrain (Load)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{Irestrain}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{A\PYZhy{}sec}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{Ioperate} \PY{o}{=} \PY{n}{Icap\PYZus{}a\PYZus{}sec} \PY{o}{+} \PY{n}{Icap\PYZus{}b\PYZus{}sec} \PY{o}{+} \PY{n}{IR2\PYZus{}sec} \PY{o}{+} \PY{n}{IR1\PYZus{}sec}
+         \PY{n}{eep}\PY{o}{.}\PY{n}{cprint}\PY{p}{(}\PY{n}{Ioperate}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{A\PYZhy{}sec}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{I\PYZhy{}Operate (Fault)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{Irestrain} \PY{o}{=} \PY{n+nb}{abs}\PY{p}{(}\PY{n}{Icap\PYZus{}a\PYZus{}sec}\PY{p}{)} \PY{o}{+} \PY{n+nb}{abs}\PY{p}{(}\PY{n}{Icap\PYZus{}b\PYZus{}sec}\PY{p}{)} \PY{o}{+} \PY{n+nb}{abs}\PY{p}{(}\PY{n}{IR2\PYZus{}sec}\PY{p}{)} \PY{o}{+} \PY{n+nb}{abs}\PY{p}{(}\PY{n}{IR1\PYZus{}sec}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{I\PYZhy{}Restrain (Fault)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{Irestrain}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{A\PYZhy{}sec}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[['IA-Fault 39.627 ∠ -83.55° A-sec']
+ ['IB-Fault 39.627 ∠ 156.45° A-sec']
+ ['IC-Fault 39.627 ∠ 36.45° A-sec']]
+[['IA-Fault 9510.524 ∠ -83.55° A-pri']
+ ['IB-Fault 9510.524 ∠ 156.45° A-pri']
+ ['IC-Fault 9510.524 ∠ 36.45° A-pri']]
+
+[['Relay-1 Current 23.356 ∠ -84.5° A-sec']
+ ['Relay-2 Current 16.279 ∠ -82.186° A-sec']]
+[['Relay-1 Current 5605.335 ∠ -84.5° A-pri']
+ ['Relay-2 Current 3907.067 ∠ -82.186° A-pri']]
+
+Relay 1:
+	Load Current: 4.967 ∠ -8.136° A-sec
+	Fault Current: 23.356 ∠ -84.5° A-sec
+	Ratio: 4.702 ∠ -76.364° 
+Relay 2:
+	Load Current: 4.967 ∠ 171.864° A-sec
+	Fault Current: 16.279 ∠ -82.186° A-sec
+	Ratio: 3.278 ∠ 105.95° 
+
+Effective Impedance From Relay 1: 1.5 ∠ 81.989° ohms
+Effective Impedance From Relay 2: 3.636 ∠ 45.713° ohms
+I-Operate (Load) 0.417 ∠ 90.0° A-sec
+I-Restrain (Load) 10.349952568074297 A-sec
+I-Operate (Fault) 39.213 ∠ -83.481° A-sec
+I-Restrain (Fault) 40.0516745616 A-sec
+
+    \end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
